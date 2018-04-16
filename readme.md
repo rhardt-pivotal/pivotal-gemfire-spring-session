@@ -1,8 +1,8 @@
 # How to Build and Run
 
-First we need to start up Geode
+First we need to start up GemFire
 ```
-scripts/startGeode.sh 
+scripts/startGemFire.sh 
 ```
 
 Then we need to run the spring boot app that uses session state cacheing.
