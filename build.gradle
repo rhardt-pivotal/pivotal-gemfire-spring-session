@@ -1,0 +1,48 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.1.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+ext {
+    gemfireVersion = '9.3.0'
+    springShellVersion = '1.2.0.RELEASE'
+    junitVersion = '4.12'
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'pivotal.field.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/libs-release' }
+    maven { url 'https://repo.spring.io/libs-milestone' }
+}
+
+
+dependencies {
+    compile 'io.pivotal.spring.cloud:spring-cloud-gemfire-spring-connector:1.2.0.RELEASE'
+    compile 'org.springframework.data:spring-data-gemfire:2.1.0.M2'
+    compile('org.springframework.session:spring-session-data-gemfire:2.0.2.RELEASE')
+    compile "io.pivotal.gemfire:geode-core:$gemfireVersion"
+
+    compile('org.springframework.boot:spring-boot-starter-web')
+    runtime('org.apache.tomcat.embed:tomcat-embed-jasper')
+    runtime('javax.servlet:jstl')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+configurations {
+    compile.exclude(group: 'org.apache.logging.log4j', module: 'log4j-to-slf4j')
+}
